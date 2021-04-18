@@ -40,13 +40,4 @@ public class repositoryTest {
             bookRepository.save(Book.builder().build());
         });
     }
-
-   /* @Test
-    public void testFindAll()
-    {
-        List<Book> books = TestCreationFactory.listOf(Book.class);
-        bookRepository.saveAll(books);
-        List<Book> all = bookRepository.findAll();
-        assertEquals(books.size(),all.size());
-    }*/
 }

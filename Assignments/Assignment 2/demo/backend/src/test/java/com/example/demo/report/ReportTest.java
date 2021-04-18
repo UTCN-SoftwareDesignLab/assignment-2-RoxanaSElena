@@ -17,9 +17,9 @@ public class ReportTest {
     @Test
     void getReportService() {
         ReportService csvReportService = reportServiceFactory.getReportService(CSV);
-        Assertions.assertEquals("I am a CSV reporter.", csvReportService.export());
+        Assertions.assertEquals("OutOfStockBooks.csv", csvReportService.export());
         ReportService pdfReportService = reportServiceFactory.getReportService(PDF);
-        Assertions.assertEquals("I am a PDF reporter.", pdfReportService.export());
+        Assertions.assertEquals("OutOfStockBooks.pdf", pdfReportService.export());
     }
 
 }

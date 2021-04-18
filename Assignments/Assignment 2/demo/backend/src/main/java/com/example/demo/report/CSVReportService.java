@@ -19,17 +19,13 @@ public class CSVReportService implements ReportService {
     private BookRepository bookRepository;
     @Override
     public String export() {
-           createCSVReport();
-           return "I am a CSV reporter.";
-    }
 
-    public void createCSVReport ()
-    {
         List<Book> books = new ArrayList<>(bookRepository.findBookByQuantity(0));
+        String filename =  "OutOfStockBooks.csv";
         FileWriter fileWriter;
 
         try{
-            fileWriter = new FileWriter("OutOfStockBooks.csv");
+            fileWriter = new FileWriter(filename);
             fileWriter.append("\n");
 
             for(Book book: books)
@@ -43,11 +39,12 @@ public class CSVReportService implements ReportService {
                 fileWriter.append("\n");
             }
             fileWriter.flush();
-            fileWriter.close();
 
         } catch (IOException e) {
             e.printStackTrace();
+            return "Something not ok";
         }
+        return filename;
     }
 
     @Override

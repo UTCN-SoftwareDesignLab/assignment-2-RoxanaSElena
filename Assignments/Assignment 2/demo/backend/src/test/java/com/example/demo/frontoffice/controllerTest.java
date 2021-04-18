@@ -64,24 +64,51 @@ public class controllerTest extends BaseControllerTest {
                 .andExpect(content().string(csvResponse));
     }
 
-   /* @Test
+    @Test
+    void create() throws Exception {
+        BookDTO bookDTO = BookDTO.builder()
+                .title("Titlu")
+                .author("Author")
+                .genre("genre")
+                .quantity(1)
+                .price(1)
+                .build();
+        when(bookService.create(bookDTO)).thenReturn(bookDTO);
+        ResultActions result = performPostWithRequestBody(FRONT_OFFICE,bookDTO);
+        result.andExpect(status().isOk())
+                .andExpect(jsonContentToBe(bookDTO));
+    }
+
+    @Test
     void edit() throws Exception {
-        long id = randomLong();
-        BookDTO reqItem = BookDTO.builder()
-                .id(id)
+        BookDTO bookDTO = BookDTO.builder()
                 .title(randomString())
                 .author(randomString())
                 .genre(randomString())
                 .quantity(randomBoundedInt(100))
                 .price(randomBoundedInt(100))
                 .build();
+        bookService.create(bookDTO);
+        when(bookService.edit(bookDTO)).thenReturn(bookDTO);
 
-       // when(bookService.edit(id, reqItem)).thenReturn(reqItem);
-
-        ResultActions result = performPutWithRequestBodyAndPathVariable(FRONT_OFFICE + ENTITY, reqItem, id);
+        ResultActions result = performPutWithRequestBody(FRONT_OFFICE, bookDTO);
         result.andExpect(status().isOk())
-                .andExpect(jsonContentToBe(reqItem));
+                .andExpect(jsonContentToBe(bookDTO));
     }
-*/
+
+    @Test
+    void delete() throws Exception {
+        BookDTO bookDTO = BookDTO.builder()
+                .id(randomLong())
+                .title(randomString())
+                .author(randomString())
+                .genre(randomString())
+                .quantity(randomBoundedInt(100))
+                .price(randomBoundedInt(100))
+                .build();
+        ResultActions result = performDeleteWIthPathVariable(FRONT_OFFICE+ENTITY, bookDTO.getId().toString());
+        result.andExpect(status().isOk());
+    }
+
 
 }

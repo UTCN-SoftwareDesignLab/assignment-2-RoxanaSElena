@@ -33,6 +33,12 @@ public abstract class BaseControllerTest {
         );
     }
 
+    protected ResultActions performPutWithRequestBody(String path, Object body) throws Exception {
+        return mockMvc.perform(jsonType(put(path)
+                .content(asJsonString(body)))
+        );
+    }
+
     protected ResultActions performPatchWithRequestBodyAndPathVariable(String path, Object body, Object pathVariable) throws Exception {
         return mockMvc.perform(jsonType(patch(path, pathVariable)
                 .content(asJsonString(body)))

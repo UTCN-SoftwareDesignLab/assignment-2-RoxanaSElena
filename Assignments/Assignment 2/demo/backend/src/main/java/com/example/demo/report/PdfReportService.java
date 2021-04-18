@@ -7,8 +7,6 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.springframework.stereotype.Service;
-
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +22,8 @@ public class PdfReportService implements ReportService {
 
     public String export() {
 
-        createPDFReport();
-        return "I am a PDF reporter.";
-    }
-
-    public void createPDFReport ()
-    {
         List<Book> books = new ArrayList<>(bookRepository.findBookByQuantity(0));
-
+        String filename = "OutOfStockBooks.pdf";
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
@@ -55,11 +47,12 @@ public class PdfReportService implements ReportService {
             }
             contentStream.endText();
             contentStream.close();
-            document.save("OutOfStockBooks.pdf");
-            document.close();
+            document.save(filename);
         } catch (IOException e) {
             e.printStackTrace();
+            return "Something not ok";
         }
+        return filename;
     }
     @Override
     public ReportType getType() {
