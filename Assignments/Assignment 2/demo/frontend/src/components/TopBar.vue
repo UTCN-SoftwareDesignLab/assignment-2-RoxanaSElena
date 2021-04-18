@@ -2,7 +2,7 @@
   <v-card color="grey lighten-4" flat tile>
     <v-toolbar>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
+      <img src="assets/b.jpg" />
       <v-toolbar-title>Bookstore</v-toolbar-title>
 
       <v-spacer></v-spacer>

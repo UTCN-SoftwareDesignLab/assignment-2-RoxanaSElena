@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import UserList from "../views/UserList.vue";
 import BookList from "../views/BookList.vue";
 import Sell from "../views/Sell.vue";
+import GoogleApi from "../views/GoogleApi.vue";
 import { auth as store } from "../store/auth.module";
 import Login from "../views/Login";
 
@@ -18,6 +19,18 @@ const routes = [
     path: "/users",
     name: "Users",
     component: UserList,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isAdmin) {
+        next();
+      } else {
+        next({ name: "Books" });
+      }
+    },
+  },
+  {
+    path: "/googleapi",
+    name: "GoogleApi",
+    component: GoogleApi,
     beforeEnter: (to, from, next) => {
       if (store.getters.isAdmin) {
         next();

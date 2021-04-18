@@ -15,8 +15,12 @@
       <v-btn @click="OutOfStockCsv"> Download CSV</v-btn>
       <v-spacer></v-spacer>
       <v-btn @click="OutOfStockPdf">Download PDF </v-btn>
+      <v-spacer></v-spacer>
       <v-btn @click="staff"> Staff </v-btn>
       <v-spacer></v-spacer>
+      <v-btn @click="newBooks"> Find Books </v-btn>
+      <v-spacer></v-spacer>
+
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -91,7 +95,7 @@ export default {
     },
 
     newBooks() {
-      router.push("/BookResults");
+      router.push("/googleapi");
     },
   },
 
